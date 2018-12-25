@@ -10,7 +10,8 @@ mongoose.connect(
     '@cluster0-inwg1.mongodb.net/test?retryWrites=true',
     {
         useNewUrlParser: true
-    });
+    }
+);
 
 
 const productRoutes = require('./api/routes/products');
