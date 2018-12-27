@@ -13,6 +13,7 @@ mongoose.connect(
     }
 );
 
+mongoose.Promise = global.Promise;
 
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
