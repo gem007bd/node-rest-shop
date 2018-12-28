@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const Product = require('../models/product');
 
-router.get('/', (req, res, next) => {
+router.get('/', (req, res, next) => { 
    Product.find()
         .select('name price _id')
         .exec()
@@ -80,7 +80,7 @@ router.get('/:productId', (req, res, next) => {
                     request: {
                         type: 'GET',
                         description: 'Get all products',
-                        url: 'http//localhost:200/products'
+                        url: 'http//localhost:2000/products'
                     }
                 });
             } else {
@@ -108,10 +108,10 @@ router.patch('/:productId', (req, res, next) => {
         .then(result => {
             console.log(result);
             res.status(200).json({
-                message: 'Product Updated', 
+                message: 'Product Updated',
                 request: {
                     type: 'PATCH',
-                    url: 'http://localhost:2000/products/' + id
+                    url: 'http://localhost:2000/products' + id
                 }
             });
         })
@@ -128,7 +128,17 @@ router.delete('/:productId', (req, res, next) => {
     Product.remove({_id: id})
         .exec()
         .then(result => {
-            res.status(200).json(result);
+            res.status(200).json({
+                message: 'Product Deleted',
+                request: {
+                    type: 'POST',
+                    url: 'http://localhost:2000/products' + id,
+                    data: {
+                        name: 'String',
+                        price: 'Number'
+                    }
+                }
+            });
         })
         .catch(err => {
             console.log(err)

@@ -12,15 +12,10 @@
         },
         {
             "type": "node",
-            "request": "attach",
-            "name": "Attach by Process ID",
-            "processId": "${command:PickProcess}"
-        },
-        {
-            "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}\\nodemon server.js"
+            "address": "localhost",
+            "port": 2000
         }
     ]
 }
