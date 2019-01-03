@@ -75,16 +75,16 @@ router.post('/', upload.single('productImage'), (req, res, next) => {
     });
     product
         .save()
-        .then(result => {
-            console.log(result);
+        .then(res => {
+            console.log(res);
         })
         .catch(err => console.log(err));
         res.status(201).json({
             message: 'Created product successfully',
             createdProduct: {
-                name: result.name,
-                price: result.price,
-                _id: result._id,
+                name: res.name,
+                price: res.price,
+                _id: res._id,
                 url: {
                     type: 'POST',
                     url: 'http://localhost:2000/products/' + result._id
