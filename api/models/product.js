@@ -10,6 +10,10 @@ const productSchema = mongoose.Schema({
         type: Number, 
         required: true
     },
+    productImage: {
+        type: String,
+        required: true
+    },
     created: {
         type: Date,
         default: Date.now

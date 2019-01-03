@@ -5,9 +5,11 @@ const mongoose = require('mongoose');
 const Order = require('../models/order');
 const Product = require('../models/product');
 
+// Handling incoming GET requests to /orders
 router.get('/', (req, res, next) => {
     Order.find()
-        .select('quantity product _id')
+        .select('product quantity _id')
+        .populate('product', 'name')
         .exec()
         .then(docs => {
             res.status(200).json({
@@ -32,6 +34,7 @@ router.get('/', (req, res, next) => {
         });
 });
 
+// Handling POST request for /orders
 router.post('/', (req, res, next) => {
     // find the product is valid or not
     Product.findById(req.body.productId)
@@ -70,8 +73,10 @@ router.post('/', (req, res, next) => {
         });
 });
 
+// Handling incoming GET request depends on orderid
 router.get('/:orderId', (req, res, next) => {
     Order.findById(req.params.orderId)
+        .populate('product')
         .exec()
         .then(order => {
             res.status(200).json({
@@ -89,7 +94,7 @@ router.get('/:orderId', (req, res, next) => {
         });
 });
 
-
+// Handling POST request to delete orders
 router.delete('/:orderId', (req, res, next) => {
     Order.remove({
             _id: req.params.orderId

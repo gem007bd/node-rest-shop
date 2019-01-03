@@ -19,6 +19,7 @@ const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
 
 app.use(morgan('dev'));
+app.use('/uploads', express.static('uploads'));
 /**
  * parsing the body
  */
